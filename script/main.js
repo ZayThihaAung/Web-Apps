@@ -52,15 +52,20 @@ sumitBtn.addEventListener('click', () => {
         clearExpense();
         alertContainer.innerHTML = '';
         alertContainer.innerHTML += alertTag1;
+        description = ''; // Pervent subtracting budget when amount is empty
+        console.log('worked');
+        return;
     }
     if(description === ''){
         clearExpense();
         alertContainer.innerHTML = '';
         alertContainer.innerHTML += alertTag2;
+        amount = ''; // Pervent subtracting budget when description is empty 
+        console.log('worked');
+        return;
     } else{
         clearExpense(); 
         alertContainer.innerHTML += confirmTag;
-        console.log(description, amount);
     }
     const expenseItem = {
         id: Date.now(),

@@ -12,6 +12,10 @@ form { margin-bottom: 20px; }
     margin-bottom: 9px;
 }
 
+.delete-item{
+    margin-left: 10px;
+}
+
 .btn-delete{
     position: relative;
     left: 79%;
@@ -30,4 +34,18 @@ form { margin-bottom: 20px; }
     .btn-delete{
         left: 40%;
     }
+}
+
+/* Responsive: tablet */
+@media (max-width: 992px) {
+    .list-group{ width: 85%; margin: 0 auto; }
+    .dropdown{ display:flex; justify-content:flex-end; margin-bottom: 12px; }
+    .btn-delete{ left: 60%; }
+}
+
+/* Responsive: mobile */
+@media (max-width: 600px) {
+    .list-group{ width: 100%; padding: 0 8px; }
+    .dropdown{ display:block; position: relative; left: 0; text-align: right; }
+    .btn-delete{ left: 0; top: 6px; position: static; margin-left: auto; }
 }

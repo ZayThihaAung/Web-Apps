@@ -1,9 +1,10 @@
 ﻿const listTag = document.querySelector('.list-group');
 const ascendTag = document.querySelector('.ascend');
 const decendTag = document.querySelector('.decend');
-const deletExpense = document.querySelector('.btn-delete');
+const deletAllExpense = document.querySelector('.btn-delete');
+const deleteExpense = document.querySelector('.delete-item');
 
-const getExpenses = JSON.parse(localStorage.getItem('expensesList')) || [];
+let getExpenses = JSON.parse(localStorage.getItem('expensesList')) || [];
 const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' });
 
 const renderHTML = (expenseList) => {
@@ -14,7 +15,8 @@ const renderHTML = (expenseList) => {
         ${Number(e.amount).toLocaleString()} MMK
         <div>${String(dateFormatter.format(new Date(e.id)))}</div>
       </div>
-      <span class="badge rounded-pill ${Number(e.amount) > 20000 ? 'bg-danger' : 'bg-primary'}">${i+1}</span>
+      <span class="badge rounded-pill ${Number(e.amount) > 20000 ? 'bg-danger' : 'bg-primary'}">.</span>
+      <button type="button" class="btn btn-outline-danger delete-item" onclick="deleteExpenseItem(this)" data-id="${e.id}">Delete</button>
     </li>
   `).join('');
     listTag.innerHTML = items || `<li class="list-group-item">No expenses added yet.</li>`;
@@ -36,10 +38,20 @@ decendTag.addEventListener('click', (event) => {
   sortAndRender((a, b) => b.amount - a.amount);
 });
 
-deletExpense.addEventListener('click', (event) => {
+deletAllExpense.addEventListener('click', (event) => {
   event.preventDefault();
   localStorage.removeItem('expensesList');
+  getExpenses = [];
   renderHTML([]);
 });
+
+const deleteExpenseItem = (button) => {
+  const id = button.getAttribute('data-id');
+  const updatedExpenses = getExpenses.filter((e) => e.id !== Number(id));
+  localStorage.setItem('expensesList', JSON.stringify(updatedExpenses));
+  getExpenses = updatedExpenses; // Update the in-memory list of expenses
+  renderHTML(updatedExpenses);
+  return;
+}
 
 renderHTML(getExpenses);
