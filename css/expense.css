@@ -1,0 +1,33 @@
+﻿body { font-family: sans-serif; }
+form { margin-bottom: 20px; }
+
+.home{
+    text-decoration: none;
+    font-size: large;
+}
+
+.dropdown{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 9px;
+}
+
+.btn-delete{
+    position: relative;
+    left: 79%;
+    top: 6px;
+}
+
+@media (max-width: 1100px) {
+    .list-group{
+        width: 65%;
+    }
+    .dropdown{
+        display: block;
+        position: relative;
+        left: 47%;
+    }
+    .btn-delete{
+        left: 40%;
+    }
+}
