@@ -1,0 +1,173 @@
+body { font-family: sans-serif; padding: 4px;}
+
+.input-group{
+    position: relative;
+    top: 30px;
+    padding: 0px 0px;
+    margin: 0%;
+}
+
+.navbar-collapse{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-item{
+    padding: 10px 40px;
+    transition: 0.8s;
+}
+
+.nav-item:hover{
+    background-color: dimgray;
+    font-size: larger;
+}
+
+.navbar-collapse{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: #E0E0E0;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
+.form-budget{
+    background-color: #E0E0E0;
+    width: 35%;
+    height: 230px;
+    border-radius: 10px;
+    border: 50px;
+    padding: 10px;
+}
+
+.btn-close{
+    margin-left: 90%;
+    display: inline;
+}
+
+.form-budget-container{
+   margin-top: 70px;
+   margin-left: 360px;
+}
+
+.spacing{
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.sumit-btn{
+    position: relative;
+    top: 40px;
+    padding: 6px;
+    margin-left: 10px;
+}
+
+.reset-bd{
+    position: relative;
+    left: 80%;
+    top: 40px;
+}
+
+.alert{
+    position: relative;
+    top: 90px;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .nav-item{
+        padding: 8px 8px;
+    }
+
+    .navbar-collapse{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #E0E0E0;
+        z-index: 100;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 6px 8px;
+    }
+
+    .input-group{
+        top: 80px;
+    }
+
+    .form-budget{
+        width: 70%;
+    }
+
+    .form-budget-container{
+       margin-top: 90px;
+       margin-left: 10%;
+    }
+
+    .sumit-btn{
+        position: relative;
+        top: 100px;
+        margin-left: 6px;
+    }
+
+    .reset-bd{
+        position: relative;
+        left: 65%;
+        top: 100px;
+    }
+
+    .alert{
+        top: 70px;
+    }
+
+    .title { margin-top: 80px; }
+}
+
+@media (max-width: 600px) {
+    .nav-item{
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .navbar-collapse{
+        flex-direction: column;
+        align-items: stretch;
+        padding: 6px;
+    }
+
+    .input-group{
+        top: 10px;
+        padding: 0 8px;
+    }
+
+    .form-budget{
+        width: 92%;
+        margin: 0 auto;
+    }
+
+    .form-budget-container{
+       margin-top: 140px;
+       margin-left: 4%;
+    }
+
+    .sumit-btn{ position: static; display: block; width: 90%; margin: 25px 16px auto; }
+
+    .reset-bd{ position: static; display:block; width: 90%; margin: 8px auto; }
+
+    .alert{ top: 120px; padding: 0 8px; }
+
+    .title { margin-top: 140px; text-align: center; }
+}
