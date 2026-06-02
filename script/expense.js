@@ -21,7 +21,7 @@ const renderHTML = (expenseList) => {
   `).join('');
     listTag.innerHTML = items || `<li class="list-group-item">No expenses added yet.</li>`;
 };
-
+// Sort
 const sortAndRender = (compareFn) => {
   const expenseList = getExpenses.slice();
   expenseList.sort(compareFn);
@@ -44,7 +44,7 @@ deletAllExpense.addEventListener('click', (event) => {
   getExpenses = [];
   renderHTML([]);
 });
-
+// Delete single expense item
 const deleteExpenseItem = (button) => {
   const id = button.getAttribute('data-id');
   const updatedExpenses = getExpenses.filter((e) => e.id !== Number(id));
