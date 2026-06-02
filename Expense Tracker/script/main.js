@@ -43,7 +43,7 @@ const clearExpense = () => {
 sumitBtn.addEventListener('click', () => {
     const amount = amountTag.value.trim();
     const description = typeTag.value.trim();
-
+    // Detect input emptiness
     if (description === '' && amount === ''){
         clearExpense();
         alertContainer.innerHTML += alertTag3;
@@ -53,15 +53,13 @@ sumitBtn.addEventListener('click', () => {
         alertContainer.innerHTML = '';
         alertContainer.innerHTML += alertTag1;
         description = ''; // Pervent subtracting budget when amount is empty
-        console.log('worked');
         return;
     }
     if(description === ''){
         clearExpense();
         alertContainer.innerHTML = '';
         alertContainer.innerHTML += alertTag2;
-        amount = ''; // Pervent subtracting budget when description is empty 
-        console.log('worked');
+        amount = ''; // Pervent subtracting budget when description is empty
         return;
     } else{
         clearExpense(); 
@@ -72,6 +70,7 @@ sumitBtn.addEventListener('click', () => {
         description: description,
         amount: Number(amount)
     };
+    // Set up expense list to local stroage
     const expenses = JSON.parse(localStorage.getItem('expensesList')) || [];
     expenses.push(expenseItem);
     localStorage.setItem('expensesList', JSON.stringify(expenses));
@@ -83,12 +82,12 @@ sumitBtn.addEventListener('click', () => {
     navTag.innerHTML += `<a class="nav-link init-budget" href="#" title="Initial Budget">${newBudget} MMK</a>`;
 });
 
-const showBudget = () => {
+const showBudgetInput = () => {
     budgetContainer.classList.remove('hide');
     budgetContainer.classList.add('show');
 }
 
-const hideBudget = () => {
+const hideBudgetInput = () => {
     budgetContainer.classList.remove('show');
     budgetContainer.classList.add('hide');
 }
@@ -104,7 +103,7 @@ budgetInputTag.addEventListener('keydown', (event) => {
         budgetBtn.click();
     }
     if (event.key === 'Escape') {
-        hideBudget();
+        hideBudgetInput();
     }
 });
 
