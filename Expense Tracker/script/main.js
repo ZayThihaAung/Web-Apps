@@ -9,6 +9,8 @@ const initialBudget = document.querySelector('.init-budget');
 const alertContainer = document.querySelector('.alert-container');
 const navTag = document.querySelector('.budget-nav');
 const resetBtn = document.querySelector('.reset-bd');
+const burgerToggler = document.querySelector('.burger-toggler');
+const burgerMenu = document.querySelector('.burger-menu-container');
 
 const confirmTag = `
     <div class="alert alert-success" role="alert">
@@ -140,5 +142,11 @@ const showBudgetTag = () => {
     };
     navTag.innerHTML += budgetTag;
 }
+
+// Humburger menu toggle
+burgerToggler.addEventListener('click', () => {
+  burgerMenu.classList.toggle('open');
+  burgerToggler.classList.toggle('open');
+});
 
 showBudgetTag();
