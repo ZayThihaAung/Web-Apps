@@ -22,6 +22,12 @@ form { margin-bottom: 20px; }
     top: 6px;
 }
 
+.expense-chart{
+    margin-bottom: 20px;
+    width: 100% !important; 
+    height: 100% !important; 
+}
+
 @media (max-width: 1100px) {
     .list-group{
         width: 65%;
@@ -29,10 +35,13 @@ form { margin-bottom: 20px; }
     .dropdown{
         display: block;
         position: relative;
-        left: 47%;
+        right: 7%;
     }
     .btn-delete{
         left: 40%;
+    }
+    .expense-chart{
+        height: 600px;
     }
 }
 
@@ -40,12 +49,20 @@ form { margin-bottom: 20px; }
 @media (max-width: 992px) {
     .list-group{ width: 85%; margin: 0 auto; }
     .dropdown{ display:flex; justify-content:flex-end; margin-bottom: 12px; }
-    .btn-delete{ left: 60%; }
+    .btn-delete{ left: 100%; }
 }
 
 /* Responsive: mobile */
 @media (max-width: 600px) {
     .list-group{ width: 100%; padding: 0 8px; }
     .dropdown{ display:block; position: relative; left: 0; text-align: right; }
-    .btn-delete{ left: 0; top: 6px; position: static; margin-left: auto; }
+    .btn-delete{ left: 0; top: 6px; position: relative; margin-left: 80px; margin-top: 10px; }
+    .home{ margin-top: 20px;}
+}
+
+@media (min-width: 400px) {
+    .list-group{ width: 100%; padding: 0 8px; }
+    .dropdown{ display:block; position: relative; left: 0; text-align: right; }
+    .btn-delete{ left: 0; top: 6px; position: static; margin-left: 140px; margin-top: 10px; }
+    .home{ margin-top: 20px;}
 }

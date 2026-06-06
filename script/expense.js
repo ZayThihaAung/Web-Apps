@@ -3,6 +3,7 @@ const ascendTag = document.querySelector('.ascend');
 const decendTag = document.querySelector('.decend');
 const deletAllExpense = document.querySelector('.btn-delete');
 const deleteExpense = document.querySelector('.delete-item');
+const canvas = document.querySelector('.expense-chart');
 
 let getExpenses = JSON.parse(localStorage.getItem('expensesList')) || [];
 const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' });
@@ -19,7 +20,29 @@ const renderHTML = (expenseList) => {
       <button type="button" class="btn btn-outline-danger delete-item" onclick="deleteExpenseItem(this)" data-id="${e.id}">Delete</button>
     </li>
   `).join('');
+
+  new Chart('expense-chart', {
+    type: 'bar',
+    data: {
+      labels: expenseList.map(e => String(e.description)),
+      datasets: [{
+        label: 'Red indicates expenses over 20,000 MMK',
+        data: expenseList.map(e => Number(e.amount)),
+        backgroundColor: expenseList.map(e => Number(e.amount) > 20000 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(0, 123, 255, 0.2)'),
+        borderColor: expenseList.map(e => Number(e.amount) > 20000 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 123, 255, 1)'),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Expense Bar Chart'
+      }
+    }
+  });
+
     listTag.innerHTML = items || `<li class="list-group-item">No expenses added yet.</li>`;
+    items.length > 0 ? canvas.style.display = 'block' : canvas.style.display = 'none';
 };
 // Sort
 const sortAndRender = (compareFn) => {
