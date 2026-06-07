@@ -8,9 +8,11 @@ const budgetInputTag = document.querySelector('.ib-input');
 const initialBudget = document.querySelector('.init-budget');
 const alertContainer = document.querySelector('.alert-container');
 const navTag = document.querySelector('.budget-nav');
+const navTagMobile = document.querySelector('.budget-nav-mobile');
 const resetBtn = document.querySelector('.reset-bd');
 const burgerToggler = document.querySelector('.burger-toggler');
 const burgerMenu = document.querySelector('.burger-menu-container');
+const menuItems = document.querySelector('.menu-item');
 
 const confirmTag = `
     <div class="alert alert-success" role="alert">
@@ -99,6 +101,7 @@ const hideBudgetInput = () => {
 const retriveBudget = () => {
     let storedBudget = JSON.parse(localStorage.getItem('budget'));
     navTag.innerHTML = '';
+    navTagMobile.innerHTML = '';
     budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">${storedBudget} MMK</a>`;
 }
 
@@ -118,6 +121,7 @@ budgetBtn.addEventListener('click', () => {
         localStorage.setItem('budget', JSON.stringify(newBudget));
         retriveBudget();
         navTag.innerHTML += budgetTag;
+        navTagMobile.innerHTML += budgetTag;
         budgetInputTag.value = '';
     }
     else{
@@ -125,6 +129,7 @@ budgetBtn.addEventListener('click', () => {
         localStorage.setItem('budget', JSON.stringify(budget));
         retriveBudget();
         navTag.innerHTML += budgetTag;
+        navTagMobile.innerHTML += budgetTag;
         budgetInputTag.value = '';
     }
 });
@@ -142,6 +147,7 @@ const showBudgetTag = () => {
     }else{
         budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">0 MMK</a>`;
     };
+    navTagMobile.innerHTML += budgetTag;
     navTag.innerHTML += budgetTag;
 }
 
@@ -150,5 +156,11 @@ burgerToggler.addEventListener('click', () => {
   burgerMenu.classList.toggle('open');
   burgerToggler.classList.toggle('open');
 });
+
+menuItems.addEventListener('click', () => {
+    burgerMenu.classList.toggle('open');
+});
+
+console.log(navTag);
 
 showBudgetTag();
