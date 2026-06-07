@@ -1,4 +1,4 @@
-﻿const sumitBtn = document.querySelector(".sumit-btn");
+const sumitBtn = document.querySelector(".sumit-btn");
 const containerTag = document.querySelector('.container');
 const amountTag = document.querySelector('.amount');
 const typeTag = document.querySelector('.describe');
@@ -8,9 +8,11 @@ const budgetInputTag = document.querySelector('.ib-input');
 const initialBudget = document.querySelector('.init-budget');
 const alertContainer = document.querySelector('.alert-container');
 const navTag = document.querySelector('.budget-nav');
+const navTagMobile = document.querySelector('.budget-nav-mobile'); // For mobile 
 const resetBtn = document.querySelector('.reset-bd');
 const burgerToggler = document.querySelector('.burger-toggler');
 const burgerMenu = document.querySelector('.burger-menu-container');
+const menuItems = document.querySelector('.menu-item');
 
 const confirmTag = `
     <div class="alert alert-success" role="alert">
@@ -45,7 +47,7 @@ const clearExpense = () => {
 sumitBtn.addEventListener('click', () => {
     const amount = amountTag.value.trim();
     const description = typeTag.value.trim();
-    // Detect input emptiness
+    // Validation for empty amount and description
     if (description === '' && amount === ''){
         clearExpense();
         alertContainer.innerHTML += alertTag3;
@@ -61,7 +63,7 @@ sumitBtn.addEventListener('click', () => {
         clearExpense();
         alertContainer.innerHTML = '';
         alertContainer.innerHTML += alertTag2;
-        amount = ''; // Pervent subtracting budget when description is empty
+        amount = ''; // Pervent subtracting budget when description is empty 
         return;
     } else{
         clearExpense(); 
@@ -72,7 +74,7 @@ sumitBtn.addEventListener('click', () => {
         description: description,
         amount: Number(amount)
     };
-    // Set up expense list to local stroage
+    // Set up expense list to local storage
     const expenses = JSON.parse(localStorage.getItem('expensesList')) || [];
     expenses.push(expenseItem);
     localStorage.setItem('expensesList', JSON.stringify(expenses));
@@ -97,6 +99,7 @@ const hideBudgetInput = () => {
 const retriveBudget = () => {
     let storedBudget = JSON.parse(localStorage.getItem('budget'));
     navTag.innerHTML = '';
+    navTagMobile.innerHTML = '';
     budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">${storedBudget} MMK</a>`;
 }
 
@@ -116,6 +119,7 @@ budgetBtn.addEventListener('click', () => {
         localStorage.setItem('budget', JSON.stringify(newBudget));
         retriveBudget();
         navTag.innerHTML += budgetTag;
+        navTagMobile.innerHTML += budgetTag;
         budgetInputTag.value = '';
     }
     else{
@@ -123,6 +127,7 @@ budgetBtn.addEventListener('click', () => {
         localStorage.setItem('budget', JSON.stringify(budget));
         retriveBudget();
         navTag.innerHTML += budgetTag;
+        navTagMobile.innerHTML += budgetTag;
         budgetInputTag.value = '';
     }
 });
@@ -140,6 +145,7 @@ const showBudgetTag = () => {
     }else{
         budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">0 MMK</a>`;
     };
+    navTagMobile.innerHTML += budgetTag;
     navTag.innerHTML += budgetTag;
 }
 
@@ -147,6 +153,10 @@ const showBudgetTag = () => {
 burgerToggler.addEventListener('click', () => {
   burgerMenu.classList.toggle('open');
   burgerToggler.classList.toggle('open');
+});
+// Hide humburger menu items
+menuItems.addEventListener('click', () => {
+    burgerMenu.classList.toggle('open');
 });
 
 showBudgetTag();
