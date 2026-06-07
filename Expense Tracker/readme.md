@@ -1,4 +1,4 @@
-﻿# Expense Tracker
+# Expense Tracker
 
 A professional web application designed to help individuals monitor and manage their financial habits through intuitive data visualization and budget tracking.
 
@@ -11,5 +11,5 @@ A professional web application designed to help individuals monitor and manage t
 - **Budget Initialization:** Set a primary financial ceiling to track against.
 - **Dual-Input System:** Efficiently log both the cost and the specific product or service purchased.
 - **Streamlined Interface:**
-    - **Main Dashboard (main.html):** Features inputs for the initial budget and two dedicated fields for logging new expenses. Includes real-time confirmation feedback upon successful data entry.
-    - **Expense Analytics (expense.html):** Provides a visual breakdown of spending through an integrated graph, complemented by a detailed history of transactions organized with descriptive tags.
+    - **Main Dashboard (main.html):** Features inputs for the initial budget and two dedicated fields for logging new expenses which are expense amount and description. Includes real-time confirmation feedback upon successful data entry.
+    - **Expense Analytics (expense.html):** Provides a visual breakdown of spending through chart.js bar chart, complemented by a detailed history of transactions organized with descriptive tags.
