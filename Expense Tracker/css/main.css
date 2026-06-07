@@ -151,7 +151,15 @@ body { font-family: sans-serif; padding: 4px;}
 
   .burger-toggler {
     display: flex;
+    position: absolute;
+
   }
+  
+    .burger-menu-container{
+        position: relative;
+        left: 0%;
+        right: 100%;
+    }
 }
 
 /* Responsive adjustments */
@@ -171,7 +179,7 @@ body { font-family: sans-serif; padding: 4px;}
         flex-direction: row;
         justify-content: space-evenly;
         padding: 6px 8px;
-        height: 47px;
+        height: 77px;
     }
 
     .navbar-nav{
@@ -186,15 +194,22 @@ body { font-family: sans-serif; padding: 4px;}
     .home-item{
         padding: 10px;
         margin-right: 500px;
+        position: relative;
+        top: 70%;
     }
 
     .burger-menu-container{
-        left: 70%;
+        position: relative;
+        left: 0%;
+        top: 60%;
+        right: 100%;
     }
 
     .burger-toggler {
         display: inline;
         margin-top: 10px;
+        position: absolute;
+        top: 10%;
     }
 
     .input-group{
@@ -242,7 +257,17 @@ body { font-family: sans-serif; padding: 4px;}
     }
 
     .burger-menu-container{
-        left: 30%;
+        position: absolute;
+        top: 60px;
+        left: 55%;
+        right: auto;
+        max-height: 300px;
+        z-index: 9998;
+    }
+
+    .burger-toggler{
+        position: absolute;
+        right: 10%;
     }
 
     .input-group{
