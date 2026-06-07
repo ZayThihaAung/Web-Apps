@@ -8,4 +8,4 @@ A web application designed to help individuals monitor and manage their financia
 **Budget Management** Dynamically calculate remaining funds by subtracting expenses from a user-defined initial budget.
 **Data Visualization** Used Chart.js to display the user's expense on bar chart.
 
-For more information [Click here](ExpenseTracker/readme.md)
+For more information [Click here](Expense_Tracker/readme.md)
