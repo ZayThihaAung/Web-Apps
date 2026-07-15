@@ -44,6 +44,7 @@ const clearExpense = () => {
     typeTag.value = '';
 }
 
+let storedBudget;
 sumitBtn.addEventListener('click', () => {
     const amount = amountTag.value.trim();
     const description = typeTag.value.trim();
@@ -98,11 +99,22 @@ const hideBudgetInput = () => {
     budgetContainer.classList.add('hide');
 }
 
+let budgetTag = '';
 const retriveBudget = () => {
-    let storedBudget = JSON.parse(localStorage.getItem('budget'));
+    storedBudget = JSON.parse(localStorage.getItem('budget'));
     navTag.innerHTML = '';
     navTagMobile.innerHTML = '';
     budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">${storedBudget} MMK</a>`;
+}
+
+const showBudgetTag = () => {
+    if(localStorage.getItem('budget')) {
+        retriveBudget();
+    }else{
+        budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">0 MMK</a>`;
+    };
+    navTagMobile.innerHTML += budgetTag;
+    navTag.innerHTML += budgetTag;
 }
 
 budgetInputTag.addEventListener('keydown', (event) => {
@@ -141,15 +153,6 @@ resetBtn.addEventListener('click', () => {
     showBudgetTag();
 });
 
-const showBudgetTag = () => {
-    if(localStorage.getItem('budget')) {
-        retriveBudget();
-    }else{
-        budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">0 MMK</a>`;
-    };
-    navTagMobile.innerHTML += budgetTag;
-    navTag.innerHTML += budgetTag;
-}
 
 // Humburger menu toggle
 burgerToggler.addEventListener('click', () => {
@@ -160,7 +163,5 @@ burgerToggler.addEventListener('click', () => {
 menuItems.addEventListener('click', () => {
     burgerMenu.classList.toggle('open');
 });
-
-console.log(navTag);
 
 showBudgetTag();
