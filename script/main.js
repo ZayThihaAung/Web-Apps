@@ -38,6 +38,12 @@ const alertTag3 = `
     </div>
 `;
 
+const alertTag4 = `
+    <div class="alert alert-danger" role="alert">
+        Your budget is underfunded. Please add your budget.
+    </div>
+`;
+
 const clearExpense = () => {
     alertContainer.innerHTML = '';
     amountTag.value = '';
@@ -72,19 +78,28 @@ sumitBtn.addEventListener('click', () => {
         clearExpense(); 
         alertContainer.innerHTML += confirmTag;
     }
-    const expenseItem = {
-        id: Date.now(),
-        description: description,
-        amount: Number(amount)
-    };
-    // Set up expense list to local storage
-    const expenses = JSON.parse(localStorage.getItem('expensesList')) || [];
-    expenses.push(expenseItem);
-    localStorage.setItem('expensesList', JSON.stringify(expenses));
 
     storedBudget = JSON.parse(localStorage.getItem('budget'));
     let newBudget = storedBudget - amount;
     localStorage.setItem('budget', JSON.stringify(newBudget));
+    // If the budget is underfunded, clear the expense list and alert the user
+    if(storedBudget < 0 || newBudget < 0){
+        clearExpense();
+        alertContainer.innerHTML = '';
+        alertContainer.innerHTML += alertTag4;
+        localStorage.removeItem('budget');
+        return;
+    } else{ 
+        // Set up expense list to local storage        
+        const expenseItem = {
+            id: Date.now(),
+            description: description,
+            amount: Number(amount)
+        };
+        const expenses = JSON.parse(localStorage.getItem('expensesList')) || [];
+        expenses.push(expenseItem);
+        localStorage.setItem('expensesList', JSON.stringify(expenses));
+    }
     navTag.innerHTML = '';
     navTag.innerHTML += `<a class="nav-link init-budget" href="#" title="Initial Budget">${newBudget} MMK</a>`;
 });
