@@ -1,11 +1,10 @@
-﻿const sumitBtn = document.querySelector(".sumit-btn");
-const containerTag = document.querySelector('.container');
+﻿const sumitBtn = document.querySelector('.sumit-btn');
 const amountTag = document.querySelector('.amount');
 const typeTag = document.querySelector('.describe');
+const productTag = document.querySelector('.product');
 const budgetContainer = document.querySelector('.form-budget-container');
 const budgetBtn = document.querySelector('.budget-btn');
 const budgetInputTag = document.querySelector('.ib-input');
-const initialBudget = document.querySelector('.init-budget');
 const alertContainer = document.querySelector('.alert-container');
 const navTag = document.querySelector('.budget-nav');
 const navTagMobile = document.querySelector('.budget-nav-mobile');
@@ -13,6 +12,12 @@ const resetBtn = document.querySelector('.reset-bd');
 const burgerToggler = document.querySelector('.burger-toggler');
 const burgerMenu = document.querySelector('.burger-menu-container');
 const menuItems = document.querySelector('.menu-item');
+const paymentToggle = document.querySelector('.payment .dropdown-toggle');
+const categoryToggle = document.querySelector('.category .dropdown-toggle');
+
+let selectedPayment = 'Cash';
+let selectedCategory = 'Food';
+let storedBudget = 0;
 
 const confirmTag = `
     <div class="alert alert-success" role="alert">
@@ -28,13 +33,13 @@ const alertTag1 = `
 
 const alertTag2 = `
     <div class="alert alert-danger" role="alert">
-        Please add the prodcut type you have bought.
+        Please add the product name you have bought.
     </div>
 `;
 
 const alertTag3 = `
     <div class="alert alert-danger" role="alert">
-        Please add both amounts and description.
+        Please add both amounts and product name.
     </div>
 `;
 
@@ -44,93 +49,164 @@ const alertTag4 = `
     </div>
 `;
 
+const alertTag5 = `
+    <div class="alert alert-danger" role="alert">
+        Could not save to the database. Please try again.
+    </div>
+`;
+
 const clearExpense = () => {
     alertContainer.innerHTML = '';
     amountTag.value = '';
     typeTag.value = '';
-}
+};
 
-let storedBudget;
-sumitBtn.addEventListener('click', () => {
+const showAlert = (html) => {
+    clearExpense();
+    alertContainer.innerHTML = html;
+};
+
+const updateBudgetDisplay = () => {
+    const budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">${storedBudget.toLocaleString()} MMK</a>`;
+    navTag.innerHTML = budgetTag;
+    navTagMobile.innerHTML = budgetTag;
+};
+
+const fetchBudget = async () => {
+    const { data, error } = await supabaseClient
+        .from('Budget')
+        .select('amount')
+        .eq('id', 1)
+        .maybeSingle();
+
+    if (error) {
+        console.error('Error fetching budget:', error);
+        storedBudget = 0;
+    } else {
+        storedBudget = data?.amount ?? 0;
+    }
+
+    updateBudgetDisplay();
+};
+
+const saveBudget = async (amount) => {
+    const { error } = await supabaseClient
+        .from('Budget')
+        .upsert({ id: 1, amount }, { onConflict: 'id' });
+
+    if (error) {
+        console.error('Error saving budget:', error);
+        return false;
+    }
+
+    storedBudget = amount;
+    updateBudgetDisplay();
+    return true;
+};
+
+const setupDropdown = (containerSelector, toggleElement, onSelect) => {
+    document.querySelectorAll(`${containerSelector} .dropdown-item`).forEach((item) => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            const value = item.textContent.trim();
+            onSelect(value);
+            toggleElement.textContent = value;
+        });
+    });
+};
+
+setupDropdown('.payment', paymentToggle, (value) => {
+    selectedPayment = value;
+});
+
+setupDropdown('.category', categoryToggle, (value) => {
+    selectedCategory = value;
+});
+
+sumitBtn.addEventListener('click', async () => {
     const amount = amountTag.value.trim();
     const description = typeTag.value.trim();
-    // Validation for empty amount and description
-    if (description === '' && amount === ''){
-        clearExpense();
-        alertContainer.innerHTML += alertTag3;
-    }
-    if(amount === ''){
-        clearExpense();
-        alertContainer.innerHTML = '';
-        alertContainer.innerHTML += alertTag1;
-        description = ''; // Pervent subtracting budget when amount is empty
-        console.log('worked');
+    const product = productTag.value.trim();
+
+    if (product === '' && amount === '') {
+        showAlert(alertTag3);
         return;
     }
-    if(description === ''){
-        clearExpense();
-        alertContainer.innerHTML = '';
-        alertContainer.innerHTML += alertTag2;
-        amount = ''; // Pervent subtracting budget when description is empty 
-        console.log('worked');
+    if (amount === '') {
+        showAlert(alertTag1);
         return;
-    } else{
-        clearExpense(); 
-        alertContainer.innerHTML += confirmTag;
+    }
+    if (product === '') {
+        showAlert(alertTag2);
+        return;
     }
 
-    storedBudget = JSON.parse(localStorage.getItem('budget'));
-    let newBudget = storedBudget - amount;
-    localStorage.setItem('budget', JSON.stringify(newBudget));
-    // If the budget is underfunded, clear the expense list and alert the user
-    if(storedBudget < 0 || newBudget < 0){
-        clearExpense();
-        alertContainer.innerHTML = '';
-        alertContainer.innerHTML += alertTag4;
-        localStorage.removeItem('budget');
+    const expenseAmount = Number(amount);
+    const newBudget = storedBudget - expenseAmount;
+
+    if (storedBudget <= 0 || newBudget < 0) {
+        showAlert(alertTag4);
+        await saveBudget(0);
         return;
-    } else{ 
-        // Set up expense list to local storage        
-        const expenseItem = {
-            id: Date.now(),
-            description: description,
-            amount: Number(amount)
-        };
-        const expenses = JSON.parse(localStorage.getItem('expensesList')) || [];
-        expenses.push(expenseItem);
-        localStorage.setItem('expensesList', JSON.stringify(expenses));
     }
-    navTag.innerHTML = '';
-    navTag.innerHTML += `<a class="nav-link init-budget" href="#" title="Initial Budget">${newBudget} MMK</a>`;
+
+    sumitBtn.disabled = true;
+
+    const { data: expense, error: expenseError } = await supabaseClient
+        .from('Expense List')
+        .insert({
+            date: new Date().toISOString().slice(0, 10),
+            product_name: product,
+            product_price: expenseAmount,
+            description: description
+        })
+        .select('id')
+        .single();
+
+    if (expenseError || !expense) {
+        console.error('Error saving expense:', expenseError);
+        showAlert(alertTag5);
+        sumitBtn.disabled = false;
+        return;
+    }
+
+    const { error: categoryError } = await supabaseClient
+        .from('Category')
+        .insert({
+            id: expense.id,
+            category: selectedCategory,
+            payment_method: selectedPayment
+        });
+
+    if (categoryError) {
+        console.error('Error saving category:', categoryError);
+        await supabaseClient.from('Expense List').delete().eq('id', expense.id);
+        showAlert(alertTag5);
+        sumitBtn.disabled = false;
+        return;
+    }
+
+    const saved = await saveBudget(newBudget);
+    if (!saved) {
+        showAlert(alertTag5);
+        sumitBtn.disabled = false;
+        return;
+    }
+
+    clearExpense();
+    alertContainer.innerHTML = confirmTag;
+    sumitBtn.disabled = false;
 });
 
 const showBudgetInput = () => {
     budgetContainer.classList.remove('hide');
     budgetContainer.classList.add('show');
-}
+};
 
 const hideBudgetInput = () => {
     budgetContainer.classList.remove('show');
     budgetContainer.classList.add('hide');
-}
-
-let budgetTag = '';
-const retriveBudget = () => {
-    storedBudget = JSON.parse(localStorage.getItem('budget'));
-    navTag.innerHTML = '';
-    navTagMobile.innerHTML = '';
-    budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">${storedBudget} MMK</a>`;
-}
-
-const showBudgetTag = () => {
-    if(localStorage.getItem('budget')) {
-        retriveBudget();
-    }else{
-        budgetTag = `<a class="nav-link init-budget" href="#" title="Initial Budget">0 MMK</a>`;
-    };
-    navTagMobile.innerHTML += budgetTag;
-    navTag.innerHTML += budgetTag;
-}
+};
 
 budgetInputTag.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -141,42 +217,50 @@ budgetInputTag.addEventListener('keydown', (event) => {
     }
 });
 
-budgetBtn.addEventListener('click', () => {
-    storedBudget = JSON.parse(localStorage.getItem('budget'));
-    if (storedBudget) {
-        let newBudget = parseInt(storedBudget) + parseInt(budgetInputTag.value.trim());
-        localStorage.setItem('budget', JSON.stringify(newBudget));
-        retriveBudget();
-        navTag.innerHTML += budgetTag;
-        navTagMobile.innerHTML += budgetTag;
-        budgetInputTag.value = '';
+budgetBtn.addEventListener('click', async () => {
+    const addedAmount = Number(budgetInputTag.value.trim());
+    if (!addedAmount || addedAmount <= 0) {
+        return;
     }
-    else{
-        let budget = budgetInputTag.value.trim();
-        localStorage.setItem('budget', JSON.stringify(budget));
-        retriveBudget();
-        navTag.innerHTML += budgetTag;
-        navTagMobile.innerHTML += budgetTag;
+
+    const newBudget = storedBudget + addedAmount;
+    const saved = await saveBudget(newBudget);
+
+    if (saved) {
         budgetInputTag.value = '';
+        hideBudgetInput();
     }
 });
 
-resetBtn.addEventListener('click', () => {
-    localStorage.removeItem('budget');
-    localStorage.removeItem('expensesList');
-    navTag.innerHTML = '';
-    showBudgetTag();
+resetBtn.addEventListener('click', async () => {
+    resetBtn.disabled = true;
+
+    const { error: categoryError } = await supabaseClient
+        .from('Category')
+        .delete()
+        .gte('id', 0);
+
+    const { error: expenseError } = await supabaseClient
+        .from('Expense List')
+        .delete()
+        .gte('id', 0);
+
+    await saveBudget(0);
+
+    if (categoryError || expenseError) {
+        console.error('Error resetting data:', categoryError || expenseError);
+    }
+
+    resetBtn.disabled = false;
 });
 
-
-// Humburger menu toggle
 burgerToggler.addEventListener('click', () => {
-  burgerMenu.classList.toggle('open');
-  burgerToggler.classList.toggle('open');
+    burgerMenu.classList.toggle('open');
+    burgerToggler.classList.toggle('open');
 });
 
 menuItems.addEventListener('click', () => {
     burgerMenu.classList.toggle('open');
 });
 
-showBudgetTag();
+fetchBudget();
