@@ -63,15 +63,26 @@ body { font-family: sans-serif; padding: 4px;}
 
 .sumit-btn{
     position: relative;
-    top: 40px;
+    top: 70px;
     padding: 6px;
-    margin-left: 10px;
+
 }
 
 .reset-bd{
     position: relative;
-    left: 80%;
-    top: 40px;
+    left: 65%;
+    top: 70px;
+}
+
+.payment{
+    position: relative;
+    top: 30px;
+}
+
+.category{
+    position: relative;
+    left: 15%;
+    bottom: 8px;
 }
 
 .alert{
