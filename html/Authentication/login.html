@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../css/Authentication/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="auth-card">
+        <h1 id="auth-title">Welcome to Expense Tracker</h1>
+        <p class="auth-subtitle">Log in to track budgets or manage your entries.</p>
+
+        <div class="toggle-container">
+            <button class="toggle-btn active" id="btn-signin" onclick="setMode('signin')">Sign in</button>
+            <button class="toggle-btn" id="btn-signup" onclick="setMode('signup')">Sign up</button>
+        </div>
+
+        <form id="auth-form">
+            <div class="form-group hidden" id="group-username">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Your display name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="mina@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="submit-btn" id="btn-submit">Sign in</button>
+        </form>
+
+        <div id="message-box" class="message"></div>
+    </div>
+    <script src="../../script/Authentication/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
