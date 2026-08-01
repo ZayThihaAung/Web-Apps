@@ -7,39 +7,62 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../script/supabase-config.js"></script>
+    <link rel="icon" href="../brand_logo.png">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="home-item">
-                        <a class="nav-link active" aria-current="page" href="main.html">Expense Tracker</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active edit-init-budget" aria-current="page" href="#" onclick="showBudgetInput()">Edit Initial Budget</a>
-                    </li>
-                    <li class="nav-item budget">
-                        <a class="nav-link active" href="expense.html">Track Expense</a>
-                    </li>
-                    <li class="nav-item budget-nav"></li>
-                    <li class="menu-container">
-                        <button class="burger-toggler" type="button" aria-label="Toggle menu">
-                            <span class="line"></span>
-                            <span class="line"></span>
-                            <span class="line"></span>
-                        </button>
-                        <div class="burger-menu-container">
-                            <a class="menu-item" href="#" onclick="showBudgetInput()">Edit Initial Budget</a>
-                            <a class="menu-item" href="expense.html">Track Expense</a>
-                            <span class="menu-item budget-nav-mobile"></span>
-                        </div>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav">
+                        <li class="home-item">
+                            <abbr title="Expense Tracker">
+                                <a class="nav-link active" aria-current="page" href="main.html">
+                                    <img src="../brand_logo.png" alt="Expense Tracker" style="height: 50px; width: 50px;">
+                                </a>
+                            </abbr>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active edit-init-budget" aria-current="page" href="#" onclick="showBudgetInput()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
+                                    <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
+                                </svg> Budget        
+                            </a>
+                            
+                        </li>
+                        <li class="nav-item budget">
+                            <a class="nav-link active" href="expense.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+                                </svg> Expense 
+                            </a>
+                        </li>
+                        <li class="nav-item budget-nav"></li>
+                        <li class="nav-item profile">
+                            <a class="nav-link active" href="Authentication/dashboard.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                </svg> Profile
+                            </a>
+                        </li>
+                        <li class="menu-container">
+                            <button class="burger-toggler" type="button" aria-label="Toggle menu">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </button>
+                            <div class="burger-menu-container">
+                                <a class="menu-item" href="#" onclick="showBudgetInput()">
+                                    Edit Initial Budget
+                                </a>
+                                <a class="menu-item" href="expense.html">Track Expense</a>
+                                <span class="menu-item budget-nav-mobile"></span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
         </nav>
         <div class="form-budget-container hide">
             <div class="form-budget">
@@ -50,7 +73,7 @@
                 <button type="button" class="budget-btn spacing btn btn-success">Okay</button>
             </div>
         </div>
-        <h5 class="title">Fill both inputs to calcute your expenses.</h5>
+        <h5 class="title">Fill all inputs to record your expenses.</h5>
         <div class="input-group mb-3">
             <span class="input-group-text">Amount</span>
             <span class="input-group-text">MMK</span>
@@ -59,15 +82,15 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Product</span>
             <span class="input-group-text">Name</span>
-            <input type="text" class="form-control product" id="type-input" aria-label="Bought Product (text only)">
+            <input type="text" class="form-control product" id="product-input" aria-label="Bought Product (text only)">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Description</span>
             <span class="input-group-text">Note</span>
-            <input type="text" class="form-control describe" id="type-input" aria-label="Description (text only)">
+            <input type="text" class="form-control describe" id="description-input" aria-label="Description (text only)">
         </div>
-        <div class="dropdown payment">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="btn-group payment">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Cash
             </button>
             <ul class="dropdown-menu">
@@ -77,7 +100,7 @@
             </ul>
         </div>
         <div class="btn-group category">
-            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Food
             </button>
             <ul class="dropdown-menu">
@@ -88,11 +111,10 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Other</a></li>
             </ul>
-        </div>
-        <button type="button" class="btn btn-success sumit-btn">Sumit</button>
-        <button type="button" class="btn btn-danger reset-bd">Reset Budget</button>
+        </div> <br>
+        <button type="button" class="btn sumit-btn">Sumit</button>
+        <button type="button" class="btn reset-bd">Reset Budget</button>
         <div class="alert-container"></div>
-    <script src="../script/supabase-config.js"></script>
     <script src="../script/main.js"></script>
 </body>
 </html>

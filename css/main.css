@@ -1,4 +1,9 @@
-﻿body { font-family: sans-serif; padding: 4px;}
+﻿body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #FFFFFF !important;
+    color: #111111;
+    padding: 4px;
+}
 
 .input-group{
     position: relative;
@@ -7,26 +12,60 @@
     margin: 0%;
 }
 
-.home-item, .nav-item{
-    padding: 10px 40px;
-    transition: 0.8s;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.nav-item:hover{
-    background-color: dimgray;
-    font-size: larger;
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.home-item, .nav-item{
+    color: #555555 !important;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 9px 30px !important;
+    transition: all 0.2s ease;
+}
+
+.home-item:hover, .nav-item:hover, .nav-item:active, .home-item:active{
+    color: #111111 !important;
+    background-color: #FAF9F6;
+}
+
+.navbar-nav{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Pushes Logo Left & Links Right */
+    align-items: center;
 }
 
 .navbar-collapse{
-    position: fixed;
+    background-color: #F7F5F0;
+    border-bottom: 1px solid #E2DED8;
+    padding: 12px 24px;
     width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: #E0E0E0;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
+}
+
+.budget-nav{
+    background-color: #FAF9F6;
+    border: 1px solid #E2DED8;
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.init-budget{
+    color: #111111;
+    font-weight: 700;
 }
 
 .show{
@@ -37,12 +76,35 @@
     display: none;
 }
 
+.form-control{
+    background-color: #FAF9F6 !important;
+    border: 1px solid #E2DED8 !important;
+    border-radius: 12px 12px 12px 6px 6px!important;
+    color: #111111 !important;
+    padding: 10px 14px;
+}
+
+.form-control:focus {
+    background-color: #FFFFFF !important;
+    border-color: #2B7FFF !important;
+    box-shadow: 0 0 0 1px #2B7FFF !important;
+}
+
+.input-group-text {
+    background-color: #F1EDE6 !important;
+    border: 1px solid #E2DED8 !important;
+    color: #555555;
+    font-weight: 600;
+}
+
 .form-budget{
-    background-color: #E0E0E0;
+    background-color: #FFFFFF !important;
+    border: 1px solid #EDEBE6;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     width: 35%;
     height: 230px;
     border-radius: 10px;
-    border: 50px;
     padding: 10px;
 }
 
@@ -61,28 +123,35 @@
     margin-top: 15px;
 }
 
-.sumit-btn{
-    position: relative;
-    top: 70px;
-    padding: 6px;
-
+.sumit-btn, .budget-btn{
+    background-color: #1E1B29 !important; /* Deep dark tone */
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 10px 24px !important;
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
-.reset-bd{
-    position: relative;
-    left: 65%;
-    top: 70px;
+.sumit-btn:hover, .budget-btn:hover {
+    background-color: #2C293A !important;
 }
 
-.payment{
-    position: relative;
-    top: 30px;
+.reset-bd, .category, .payment {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E2DED8 !important;
+    color: #111111 !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    padding: 8px 20px !important;
 }
 
-.category{
-    position: relative;
-    left: 15%;
-    bottom: 8px;
+.reset-bd:hover, .payment .btn:hover, .category .btn:hover {
+    background-color: #FAF9F6 !important;
+}
+
+.reset-bd, .payment, .category, .sumit-btn{
+    margin-top: 30px;
 }
 
 .alert{
@@ -92,6 +161,8 @@
 
 .title {
     margin-top: 50px;
+    color: #111111;
+    font-weight: 700;
 }
 
 /*Humburger menu*/
@@ -206,7 +277,7 @@
         padding: 10px;
         margin-right: 500px;
         position: relative;
-        top: 70%;
+        top: 5%;
     }
 
     .burger-menu-container{
@@ -253,6 +324,9 @@
     }
 
     .title { margin-top: 80px; }
+
+    .payment { top: 70px; }
+    .category { bottom: 0px; top: 35px; }
 }
 
 @media (max-width: 700px) {
@@ -303,4 +377,6 @@
     .alert{ top: 120px; padding: 0 8px; }
 
     .title { margin-top: 140px; text-align: center; }
+
+    .category{ left: 30%;}
 }

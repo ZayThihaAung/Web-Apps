@@ -8,6 +8,57 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    
+    <div class="dashboard-wrapper">
+        <div class="header-actions">
+            <a href="../main.html" class="back-link">← Back to home</a>
+            <button class="btn-signout">Sign out</button>
+        </div>
+
+        <h1 id="profile-title">My profile</h1>
+        <p class="subtitle">Keep your account safe.</p>
+
+        <!-- Main Card Block -->
+        <div class="dash-card">
+            
+            <!-- Avatar Upload Section Box -->
+            <div class="profile-card">
+                <div class="profile-pic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                </div>
+                <div class="avatar-info">
+                    <h3>Avatar image</h3>
+                    <p>PNG or JPG, up to a few MB.</p>
+                    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    <div class="avatar-actions-text">Choose an image</div>
+                    <div class="avatar-buttons">
+                        <label for="avatar-input" class="btn-upload">
+                            Change avatar
+                        </label>
+                        <button type="button" class="btn-remove">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Fields Container -->
+            <div class="form-fields" id="info-container">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="username field-display" id="display-username">Mina</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="email field-display" id="display-email">mina@gmail.com</div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" id="action-btn">Customize</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../script/supabase-config.js"></script>
+    <script src="../../script/Authentication/dashboard.js"></script>
 </body>
 </html>

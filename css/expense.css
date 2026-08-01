@@ -1,24 +1,31 @@
-﻿body { font-family: sans-serif; }
+﻿body { 
+    font-family: sans-serif;
+    padding-top: 30px;
+}
 form { margin-bottom: 20px; }
 
 .home{
+    color: #8c6d53;
     text-decoration: none;
-    font-size: large;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .dropdown{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 9px;
+    background-color: #FFFFFF !important;
+    border: 1px solid #E2DED8 !important;
+    color: #111111 !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    padding: 8px 20px !important;
+    margin-bottom: 10px;
 }
 
-.delete-item{
-    margin-left: 10px;
+.dropdown:hover{
+    background-color: #FAF9F6 !important;
 }
 
 .btn-delete{
-    position: relative;
-    left: 79%;
     top: 6px;
 }
 
@@ -26,6 +33,87 @@ form { margin-bottom: 20px; }
     margin-bottom: 20px;
     width: 100% !important; 
     height: 100% !important; 
+}
+
+.list-group-item {
+  background-color: #FFFFFF !important;
+  border: 1px solid #EDEBE6 !important;
+  border-radius: 16px !important;
+  margin-bottom: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.list-group-item .fw-bold {
+  color: #111111;
+  font-size: 1.1rem;
+  font-weight: 700 !important;
+  margin-bottom: 2px;
+}
+
+/* Amount & Description */
+.list-group-item .ms-2 {
+  color: #333333;
+  font-size: 0.95rem;
+}
+
+.list-group-item .ms-2 div {
+  color: #666666;
+  font-size: 0.875rem;
+  margin-top: 2px;
+}
+
+/* Metadata Text (Category · Payment Method) */
+.list-group-item small.text-muted {
+  color: #888888 !important;
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 6px;
+}
+
+/* Indicator Badges */
+.list-group-item .badge {
+  width: 10px;
+  height: 10px;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  align-self: center;
+  margin-right: 12px;
+  color: transparent !important; /* Hides the period dot text */
+}
+
+.list-group-item .badge.bg-danger {
+  background-color: #E53935 !important; /* Soft Red for High Expense */
+}
+
+.list-group-item .badge.bg-primary {
+  background-color: #2B7FFF !important; /* Accent Blue for Normal Expense */
+}
+
+/* Delete Button */
+.list-group-item .btn.delete-item {
+  background-color: #FAF9F6 !important;
+  border: 1px solid #E2DED8 !important;
+  color: #D32F2F !important; /* Soft Red Text */
+  border-radius: 20px !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  align-self: center;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.list-group-item .btn.delete-item:hover {
+  background-color: #FDF2F2 !important;
+  border-color: #F8B4B4 !important;
+  color: #B71C1C !important;
 }
 
 @media (max-width: 1100px) {
@@ -63,6 +151,6 @@ form { margin-bottom: 20px; }
 @media (min-width: 400px) {
     .list-group{ width: 100%; padding: 0 8px; }
     .dropdown{ display:block; position: relative; left: 0; text-align: right; }
-    .btn-delete{ left: 0; top: 6px; position: static; margin-left: 140px; margin-top: 10px; }
+    .btn-delete{ left: 0; top: 6px; position: static; margin-top: 10px; }
     .home{ margin-top: 20px;}
 }
