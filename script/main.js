@@ -58,6 +58,7 @@ const alertTag5 = `
 const clearExpense = () => {
     alertContainer.innerHTML = '';
     amountTag.value = '';
+    productTag.value = '';
     typeTag.value = '';
 };
 

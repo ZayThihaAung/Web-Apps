@@ -309,14 +309,14 @@
 
     .sumit-btn{
         position: relative;
-        top: 100px;
+        top: 40px;
         margin-left: 6px;
     }
 
     .reset-bd{
         position: relative;
         left: 65%;
-        top: 100px;
+        top: 40px;
     }
 
     .alert{
@@ -325,8 +325,8 @@
 
     .title { margin-top: 80px; }
 
-    .payment { top: 70px; }
-    .category { bottom: 0px; top: 35px; }
+    .payment { top: 50px; }
+    .category { bottom: 0px; top: 50px; }
 }
 
 @media (max-width: 700px) {
@@ -378,5 +378,5 @@
 
     .title { margin-top: 140px; text-align: center; }
 
-    .category{ left: 30%;}
+    .payment, .category{ left: 0%; top: 0%;}
 }

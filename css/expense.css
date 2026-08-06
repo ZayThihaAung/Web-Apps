@@ -19,6 +19,7 @@ form { margin-bottom: 20px; }
     font-weight: 600;
     padding: 8px 20px !important;
     margin-bottom: 10px;
+    width: 14%;
 }
 
 .dropdown:hover{
