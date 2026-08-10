@@ -1,4 +1,4 @@
-﻿const listTag = document.querySelector('.list-group');
+const listTag = document.querySelector('.list-group');
 const ascendTag = document.querySelector('.ascend');
 const decendTag = document.querySelector('.decend');
 const orderTag = document.querySelector('.dropdown');
@@ -60,7 +60,7 @@ const renderHTML = (expenseList) => {
                     label: 'Red indicates expenses over 20,000 MMK',
                     data: normalized.map((expense) => Number(expense.amount)),
                     backgroundColor: normalized.map((expense) =>
-                        Number(expense.amount) > 20000 ? '#FFE0E6' : '#CCE5FF'
+                        Number(expense.amount) > 20000 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(0, 123, 255, 0.2)'
                     ),
                     borderColor: normalized.map((expense) =>
                         Number(expense.amount) > 20000 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 123, 255, 1)'
