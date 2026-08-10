@@ -60,7 +60,7 @@ const renderHTML = (expenseList) => {
                     label: 'Red indicates expenses over 20,000 MMK',
                     data: normalized.map((expense) => Number(expense.amount)),
                     backgroundColor: normalized.map((expense) =>
-                        Number(expense.amount) > 20000 ? 'rgba(255, 99, 132, 0.2)' : 'rgba(0, 123, 255, 0.2)'
+                        Number(expense.amount) > 20000 ? '#FFE0E6' : '#CCE5FF'
                     ),
                     borderColor: normalized.map((expense) =>
                         Number(expense.amount) > 20000 ? 'rgba(255, 99, 132, 1)' : 'rgba(0, 123, 255, 1)'
